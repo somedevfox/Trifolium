@@ -27,14 +27,22 @@ module NeoRPGServer
                     NeoRPGServer::Logger.LogSuccess(NeoRPGServer::Strings::PREFIX_Server, NeoRPGServer::Strings::STATUS_NewConnection);
                     
                     # Creating new CLIENT for CONNECTION
-                    client = @ClientManager.Add(conn)
+                    client = $ClientManager.Add(conn)
     
                     begin
                         messageBuffer = ''
                         while client.connected?
                             messageBuffer += conn.recv(0xFFFF)
                             
-                            puts messageBuffer
+                            case messageBuffer
+                                when /\ANRMSINIT\\(.+)\\(.+)\\(.+)/ 
+                                    client.Decline("ERR\\invalid_libver") if $1 != NRPGS_VERSION
+                                    client.Decline("ERR\\invalid_gamever") if $1 != @configfile["Server Info"]["GameVersion"]
+                                    break
+                                when /\AL\\(.+)\\(.+)/
+
+                                    break
+                            end
                         end
                     end
                 }

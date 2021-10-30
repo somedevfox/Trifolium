@@ -13,7 +13,12 @@ module NeoRPGServer
         end
 
         def connected?
-            return @socket.closed?
+            return !@socket.closed?
+        end
+
+        def Decline(message)
+            @socket.puts message
+            @socket.close
         end
     end
 end

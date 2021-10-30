@@ -10,19 +10,25 @@ load 'src/Strings.rb'
 load 'src/Server.rb'
 load 'src/ClientManager.rb'
 load 'src/Client.rb'
+load 'src/Commands.rb'
 
 # Requiring external libraries
 require 'mysql2'
 puts "[+] [Library Loader] MySQL Driver has been loaded."
 require 'inifile'
 puts "[+] [Library Loader] IniFile library has been loaded."
+require 'colorize'
+puts "[+] [Library Loader] colorize library has been loaded."
 
+# Constants
 NRPGS_VERSION = :NRPGSv1
 
-puts "\n\nNeoRPGServer #{NRPGS_VERSION}. Written by `Delight-GameStudios`.\n\n\n"
+# Run Splash
+for l in Splash2 do; puts l.light_magenta ;end
+puts "\nNeoRPGServer #{NRPGS_VERSION}. Written by `Delight-GameStudios` and `Eternabyte`.\n\n\n".green.underline
 
 module NeoRPGServer
-    @configuration = {};
+    $configuration = {};
 
     #------------------------------------------------#
     # Starts Neo Server.
@@ -31,12 +37,13 @@ module NeoRPGServer
         NeoRPGServer::Logger.Log(NeoRPGServer::Strings::PREFIX_Server, "Starting server.")
 
         if File.exists?('configuration.ini')
-            configfile = IniFile.load('configuration.ini')
+            @configfile = IniFile.load('configuration.ini')
             # NeoRPGServer::Logger.LogSuccess(NeoRPGServer::Strings::PREFIX_ConfigLoader, "File loaded successfully.")
-            sqldata = configfile["SQL"]
+            sqldata = @configfile["SQL"]
             @configuration[:SQL] = sqldata
-            @configuration[:Server] = configfile["Server Info"]
-            @ClientManager = NeoRPGServer::ClientManager.new
+            @configuration[:Server] = @configfile["Server Info"]
+            puts @configuration[:Server]
+            $ClientManager = NeoRPGServer::ClientManager.new
             @server = NeoRPGServer::Server.new(@configuration)
         else 
             NeoRPGServer::Logger.LogError(NeoRPGServer::Strings::PREFIX_ConfigLoader, "File doesn't exist. Shutting down server...")
@@ -55,4 +62,6 @@ begin
     NeoRPGServer.Run
 rescue Interrupt
     NeoRPGServer::Logger.LogSuccess(NeoRPGServer::Strings::PREFIX_Server, "CTRL+C received. Shutting down server...")
+#rescue NoMemoryError, ScriptError, StandardError, NameError => error
+    #puts error.to_s.red.underline.bold.italic
 end
