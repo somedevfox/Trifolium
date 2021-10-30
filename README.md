@@ -1,4 +1,4 @@
-# NeoRPGServer
+# Trifolium
  
  
-NeoRMXPServer is a multiplayer RPG Maker server and client library.
+Trifolium is a multiplayer RPG Maker server and client library.
