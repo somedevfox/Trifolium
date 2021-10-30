@@ -42,7 +42,7 @@ module NeoRPGServer
             sqldata = @configfile["SQL"]
             @configuration[:SQL] = sqldata
             @configuration[:Server] = @configfile["Server Info"]
-            puts @configuration[:Server]
+            # puts @configuration[:Server]
             $ClientManager = NeoRPGServer::ClientManager.new
             @server = NeoRPGServer::Server.new(@configuration)
         else 
