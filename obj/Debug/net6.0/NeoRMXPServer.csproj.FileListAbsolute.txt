@@ -1,0 +1,15 @@
+C:\Users\somedevfox\Documents\GitHub\NeoRMXPServer\bin\Debug\net6.0\NeoRMXPServer.exe
+C:\Users\somedevfox\Documents\GitHub\NeoRMXPServer\bin\Debug\net6.0\NeoRMXPServer.deps.json
+C:\Users\somedevfox\Documents\GitHub\NeoRMXPServer\bin\Debug\net6.0\NeoRMXPServer.runtimeconfig.json
+C:\Users\somedevfox\Documents\GitHub\NeoRMXPServer\bin\Debug\net6.0\NeoRMXPServer.dll
+C:\Users\somedevfox\Documents\GitHub\NeoRMXPServer\bin\Debug\net6.0\ref\NeoRMXPServer.dll
+C:\Users\somedevfox\Documents\GitHub\NeoRMXPServer\bin\Debug\net6.0\NeoRMXPServer.pdb
+C:\Users\somedevfox\Documents\GitHub\NeoRMXPServer\obj\Debug\net6.0\NeoRMXPServer.csproj.AssemblyReference.cache
+C:\Users\somedevfox\Documents\GitHub\NeoRMXPServer\obj\Debug\net6.0\NeoRMXPServer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\somedevfox\Documents\GitHub\NeoRMXPServer\obj\Debug\net6.0\NeoRMXPServer.AssemblyInfoInputs.cache
+C:\Users\somedevfox\Documents\GitHub\NeoRMXPServer\obj\Debug\net6.0\NeoRMXPServer.AssemblyInfo.cs
+C:\Users\somedevfox\Documents\GitHub\NeoRMXPServer\obj\Debug\net6.0\NeoRMXPServer.csproj.CoreCompileInputs.cache
+C:\Users\somedevfox\Documents\GitHub\NeoRMXPServer\obj\Debug\net6.0\NeoRMXPServer.dll
+C:\Users\somedevfox\Documents\GitHub\NeoRMXPServer\obj\Debug\net6.0\ref\NeoRMXPServer.dll
+C:\Users\somedevfox\Documents\GitHub\NeoRMXPServer\obj\Debug\net6.0\NeoRMXPServer.pdb
+C:\Users\somedevfox\Documents\GitHub\NeoRMXPServer\obj\Debug\net6.0\NeoRMXPServer.genruntimeconfig.cache
