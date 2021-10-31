@@ -16,6 +16,7 @@ namespace Trifolium {
             // * Now, we can create socket.
             Socket server = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
+            // * this FUCKER brings up nullreference something
             logger.Log("Server", $"Socket initialized on host: {server.RemoteEndPoint.ToString()}:{port}");
         }
     };
