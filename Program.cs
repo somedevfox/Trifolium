@@ -8,7 +8,7 @@ namespace Trifolium
     {
         static void Main(string[] args)
         {
-            Logger logger = new Logger();
+            // Create game server.
             Server server = new Server(5555);
         }
     }
