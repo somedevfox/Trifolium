@@ -24,3 +24,10 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: built_artifact
+      run: touch ${{ runner.temp }}\built_artifact
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: Trifolium_Windows_${{ github.uuid }}
+        path: ${{ runner.temp }}\built_artifact
