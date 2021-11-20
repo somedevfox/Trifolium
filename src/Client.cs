@@ -69,6 +69,8 @@ namespace Trifolium
                         string data = null;
                         data += Encoding.UTF8.GetString(bytes, 0, numByte); // * Buffer (string).
 
+                        Structs.Error err = new Structs.Error();
+
                         // [ANCHOR] |  Parse JSON buffer.
                         var jsonobj = Utf8Json.JsonSerializer.Deserialize<Structs.Event>(data);
                         /*if (jsonobj.e == "test") // * Test event.
@@ -119,6 +121,13 @@ namespace Trifolium
                         foreach (MethodInfo m in typeof(Events).GetMethods())
                         {
                             EventMethods.Add(m.Name, m.CreateDelegate<Delegate>());
+                        }
+                        if(EventMethods.ContainsKey(jsonobj.e)) {
+                            EventMethods[jsonobj.e].DynamicInvoke(socket, jsonobj.d);
+                        } else {
+                            err.id = 10;
+                            err.message = "invalid_event";
+                            socket.Send(Encoding.UTF8.GetBytes(JsonSerializer.Serialize<Structs.Error>(err).ToString()));
                         }
                     }
 
