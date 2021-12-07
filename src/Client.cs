@@ -123,8 +123,10 @@ namespace Trifolium
                             EventMethods.Add(m.Name, m.CreateDelegate<Delegate>());
                         }
                         if(EventMethods.ContainsKey(jsonobj.e)) {
+                            Logger.Log("Client Thread Debug", "contains key");
                             EventMethods[jsonobj.e].DynamicInvoke(socket, jsonobj.d);
                         } else {
+                            Logger.LogError("Client Thread", "Client tried to invoke an unexistent event.");
                             err.id = 10;
                             err.message = "invalid_event";
                             socket.Send(Encoding.UTF8.GetBytes(JsonSerializer.Serialize<Structs.Error>(err).ToString()));
@@ -132,6 +134,10 @@ namespace Trifolium
                     }
 
                 }
+            }
+            catch(JsonParsingException jsonErr) {
+                Logger.LogError("Client Thread", "Client have sent invalid JSON payload.");
+                return;
             }
             catch (SocketException socketErr)
             {
