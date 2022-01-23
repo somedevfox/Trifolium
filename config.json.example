@@ -1,0 +1,11 @@
+{
+    "gameVersion": "0.1",
+    "gameserver": {
+        "port": 5555,
+        "whitelist": {
+            "enabled": true,
+            "location": "whitelist.json"
+        },
+        "chatEnabled": true
+    }
+}
