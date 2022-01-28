@@ -73,64 +73,10 @@ namespace Trifolium
 
                         // [ANCHOR] |  Parse JSON buffer.
                         var jsonobj = Utf8Json.JsonSerializer.Deserialize<Structs.Event>(data);
-                        /*if (jsonobj.e == "test") // * Test event.
-                            Logger.Log("Client Thread", "This connection was created by client to test server's availability.");
-                        else if (jsonobj.e == "init")
-                        { // * Event for checking library, game versions and extensions between client and server.
-                            Logger.Log("Client Thread", "Real connection was established by client.");
 
-                            Structs.Status status = new Structs.Status(); // * Structs are required by JsonConvert.
-
-                            status.e = "init"; // * Set status event.
-                            if (jsonobj.d["libver"] != Info.libver)
-                            {
-                                Logger.LogError("Client Thread", "Client-side library is outdated, disconnecting and terminating thread.");
-                                status.sid = 20; // * ERR: Trifolium is outdated.
-                                socket.Close();
-                                return;
-                            }
-                            else if (jsonobj.d["gamever"] != Info.gamever)
-                            {
-                                Logger.LogError("Client Thread", "Game version is outdated, disconnecting and terminating thread.");
-                                status.sid = 21; // * ERR: Game is outdated.
-                                return;
-                            }
-                            else if (Info.GetExtensions(jsonobj.d["extensions"]) != Info.extensions.ToString())
-                            {
-                                Logger.LogError("Client Thread", "Client and server extensions do not match, disconnecting and terminating thread.");
-                                status.sid = 22; // * ERR: Extension lists do not match.
-                                return;
-                            }
-                            else
-                                status.sid = 10; // * Everything is fine :) Connection success.
-                            
-                            socket.Send(
-                                        JsonSerializer.Serialize<Structs.Status>(status)
-                                    ); // * Aaaand send result to client (we need to turn buffer string to bytes first).
-                            if (status.sid.ToString().StartsWith("2")) // * If StatusId starts with error prefix, close connection.
-                                socket.Close();
-                            ClientInitialized = true; // * Buf if StatusId is NOT 2 - set that this client is valid.
-                            
-                            Events events = new Events();
-                        }
-                        else if (jsonobj.e == "login")
-                        { // * Login event.
-                            Logger.Log("Client Thread", $"{jsonobj.d["username"]} attempts to log in.");
-                        }*/
-                        Dictionary <string, Delegate> EventMethods = new Dictionary<string, Delegate>();
-                        foreach (MethodInfo m in typeof(Events).GetMethods())
-                        {
-                            EventMethods.Add(m.Name, m.CreateDelegate<Delegate>());
-                        }
-                        if(EventMethods.ContainsKey(jsonobj.e)) {
-                            Logger.Log("Client Thread Debug", "contains key");
-                            EventMethods[jsonobj.e].DynamicInvoke(socket, jsonobj.d);
-                        } else {
-                            Logger.LogError("Client Thread", "Client tried to invoke an unexistent event.");
-                            err.id = 10;
-                            err.message = "invalid_event";
-                            socket.Send(Encoding.UTF8.GetBytes(JsonSerializer.Serialize<Structs.Error>(err).ToString()));
-                        }
+                        Type t = Type.GetType("Trifolium.Events");
+                        MethodInfo mi = t.GetMethod(jsonobj.e);
+                        mi.Invoke(t, new object[] { socket, jsonobj.d });
                     }
 
                 }

@@ -8,6 +8,7 @@ namespace Trifolium
     {
         static void Main(string[] args)
         {
+			Console.WriteLine(Config.GetConfig().gameserver.port);
             // Create game server.
             Server server = new Server(5555);
         }

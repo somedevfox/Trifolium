@@ -3,3 +3,6 @@ bin/
 .vscode/
 cert/
 obj/
+
+config.json
+whitelist.json
