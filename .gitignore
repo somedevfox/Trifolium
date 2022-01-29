@@ -1,8 +1,13 @@
-build/
-bin/
+# Ignore directories
 .vscode/
+build/
 cert/
+bin/
 obj/
 
-config.json
+# Ignore file extensions
+*.nettrace
+
+# Ignore files
 whitelist.json
+config.json
